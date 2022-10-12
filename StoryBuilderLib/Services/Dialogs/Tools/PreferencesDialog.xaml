@@ -43,6 +43,10 @@
                     <Button Content="Open Logs folder" HorizontalAlignment="Center" Click="OpenPath" Margin="5" Width="200"/>
                     <Button Content="Join the StoryBuilder Discord!" HorizontalAlignment="Center" Click="OpenDiscordURL" Margin="5"/>
                     <TextBlock Text="StoryBuilder was created by Terry Cox, Jake Shaw (Rarisma) and Kyle Lemons" TextWrapping="WrapWholeWords" Margin="5" FontSize="13"/>
+                    <ComboBox SelectionChanged="Selector_OnSelectionChanged">
+                        <ComboBoxItem Content="light"/>
+                        <ComboBoxItem Content="dark"/>
+                    </ComboBox>
                 </StackPanel>
             </PivotItem>
             <PivotItem Header="What's new">

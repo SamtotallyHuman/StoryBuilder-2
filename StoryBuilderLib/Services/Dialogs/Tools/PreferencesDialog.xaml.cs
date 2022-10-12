@@ -7,6 +7,7 @@ using Windows.Storage;
 using Windows.Storage.Pickers;
 using CommunityToolkit.Mvvm.DependencyInjection;
 using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Controls;
 using Octokit;
 using StoryBuilder.Models;
 using StoryBuilder.Services.Installation;
@@ -14,6 +15,8 @@ using StoryBuilder.Services.Logging;
 using StoryBuilder.ViewModels.Tools;
 using WinRT;
 using Page = Microsoft.UI.Xaml.Controls.Page;
+using Google.Protobuf.WellKnownTypes;
+using System.Threading.Tasks;
 
 namespace StoryBuilder.Services.Dialogs.Tools;
 
@@ -32,7 +35,7 @@ public sealed partial class PreferencesDialog : Page
         {
             CPUArchitecture.Text = "CPU ARCH: " + RuntimeInformation.ProcessArchitecture;
             OSArchitecture.Text = "OS ARCH: " + RuntimeInformation.OSArchitecture;
-            OSInfo.Text = "OS Info: Windows Build " + Environment.OSVersion.VersionString.Replace("Microsoft Windows NT 10.0.","").Replace(".0","");
+            OSInfo.Text = "OS Info: Windows Build " + Environment.OSVersion.VersionString.Replace("Microsoft Windows NT 10.0.", "").Replace(".0", "");
             if (IntPtr.Size == 4) { AppArchitecture.Text = "We are running as a 32 bit process."; }
             else if (IntPtr.Size == 8) { AppArchitecture.Text = "We are running as a 64 bit process."; }
             else { AppArchitecture.Text = $"UNKNOWN ARCHITECTURE!\nIntPtr was {IntPtr.Size}, expected 4 or 8."; }
@@ -156,5 +159,25 @@ public sealed partial class PreferencesDialog : Page
     private async void Reinstall(object sender, RoutedEventArgs e)
     {
         await Ioc.Default.GetRequiredService<InstallationService>().InstallFiles();
+    }
+
+    private void Selector_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        if ((sender as ComboBox).SelectedIndex == 0)
+        {
+            if (GlobalData.MainWindow.Content is FrameworkElement rootElement)
+            {
+                rootElement.RequestedTheme = ElementTheme.Light;
+            }
+
+        }
+        else if ((sender as ComboBox).SelectedIndex == 1)
+        {
+            if (GlobalData.MainWindow.Content is FrameworkElement rootElement)
+            {
+                rootElement.RequestedTheme = ElementTheme.Dark;
+            }
+
+        }
     }
 }
