@@ -853,9 +853,10 @@ namespace StoryBuilder.ViewModels
                 return;
             }
             Logger.Log(LogLevel.Trace, "Saving file");
-            try //Updating the lost modified timer
+            try //Updating the last modified timer
             {
-                (StoryModel.StoryElements.StoryElementGuids[DataSource[0].Uuid] as OverviewModel).DateModified = DateTime.Now.ToString("d");
+                //(StoryModel.StoryElements.StoryElementGuids[DataSource[0].Uuid] as OverviewModel).DateModified = DateTime.Now.ToString("d");
+                (StoryModel.StoryElements.StoryElementGuids[StoryModel.ExplorerView[0].Uuid] as OverviewModel).DateModified = DateTime.Now.ToString("d");
             }
             catch (NullReferenceException) { Messenger.Send(new StatusChangedMessage(new($"Failed to update Last Modified date", LogLevel.Warn))); } //This appears to happen when in narrative view but im not sure how to fix it.
 
