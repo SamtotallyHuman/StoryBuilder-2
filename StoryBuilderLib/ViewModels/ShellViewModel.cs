@@ -1063,10 +1063,10 @@ public class ShellViewModel : ObservableRecipient
                 MasterPlotsViewModel _masterPlotsVM = Ioc.Default.GetRequiredService<MasterPlotsViewModel>();
                 string _masterPlotName = _masterPlotsVM.MasterPlotName;
                 MasterPlotModel _model = _masterPlotsVM.MasterPlots[_masterPlotName];
-                IList<MasterPlotScene> _scenes = _model.MasterPlotScenes;
-                foreach (MasterPlotScene _scene in _scenes)
+                IList<MasterPlotScene> _problems = _model.MasterPlotScenes;
+                foreach (MasterPlotScene _problem in _problems)
                 {
-                    SceneModel _child = new(StoryModel) { Name = _scene.SceneTitle, Remarks = "See Notes.", Notes = _scene.Notes };
+                    ProblemModel _child = new(StoryModel) { Name = _problem.SceneTitle, StoryQuestion = "See Notes.", Notes = _problem.Notes };
 
                     if (RightTappedNode == null)
                     {
