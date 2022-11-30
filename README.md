@@ -63,7 +63,7 @@ Strictly from the code side, take a look at [Programmer Notes][10].
 
 ## Usage
 
-We will provide program demos video soon.
+We will provide a program demo video soon.
 
 We group StoryBuilder's plans into a series of [GitHub Projects][18].
 
